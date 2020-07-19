@@ -21,7 +21,7 @@ You should have [Pipenv](https://pypi.org/project/pipenv/) installed in your com
 - Run `python manage.py loaddata ./hangman/fixtures/*` to load data *(first time only)*
 - Run `python manage.py runsslserver 0.0.0.0:8888` to start the backend server
 
-Run `py.test` to launch the backend test runner.
+Run `py.test` to start the backend testing.
 
 ### Frontend
 You should have [Yarn](https://classic.yarnpkg.com/en/) installed in your computer before the next step.
@@ -29,7 +29,7 @@ You should have [Yarn](https://classic.yarnpkg.com/en/) installed in your comput
 - In the **frontend** folder, run `yarn install` to install node modules
 - When the backend server is started, run `yarn start` and the app will be running on [http://localhost:3000](http://localhost:3000) in the browser
 
-Run `yarn test` to launch the frontend test runner.
+Run `yarn test` to start the frontend testing.
 
 ## Author
 Yunju Chen, [yunjuc](https://github.com/yunjuc) | [@yunjuc](http://twitter.com/yunjuc/)
