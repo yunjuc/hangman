@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  border: 0;
+}
+
+body {
+  background-color: #282c34;
+  color: white;
+  padding: 20px;
+  font-family: 'Ranchers';
+  font-weight: 10;
+  text-align: center;
+}
+
+.title {
+  font-size: 4em;
+  margin-top: 20px;;
+}
+
+p {
+  font-size: 1.5em;
+  margin: 10px;
+}
+
+button {
+  border-radius: 8px;
+  background: none;
+  color: white;
+  border: 1px solid white;
+  cursor:pointer;
+}
+
+.letters {
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  font-size: 1em;
+  padding: 15px;
+}
+
+#start {
+  margin: 20px;
+  width: 200px;
+  padding: 15px;
+  font-size: 1em;
+}
+
+button:hover {
+  background: rgba(53, 83, 105, 0.3)
+}
+
+button:disabled {
+  color: #FF6673;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.left-pane {
+  width: 50%;
+}
+
+.right-pane {
+  width: 45%;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  margin: auto 0 auto 0;
+  padding-right: 100px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#game {
+  text-align: center;
+}
+
+#keyboard {
+  margin-top: 20px;
+}
+
+#guess {
+  letter-spacing: 10px;
+  font-size: 4.5em;
+  margin: 0.2em 0 0.2em 0;
+  padding: 0.2em;
+}
+
+#tries {
+  font-family: Arial;
+  font-size: 1.2em;
+  margin-right: 10px;
+}
+
+#answer {
+  font-family: Arial;
+  font-size: 1.2em;
+}
+
+#result {
+  font-size: 3em;
+  color: #FF6673;
+}
+
+
+@media only screen and (max-width: 850px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .right-pane {
+    margin: auto;
+    height: auto;
+    padding: 0;
+  }
+}

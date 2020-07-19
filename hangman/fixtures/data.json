@@ -1,0 +1,72 @@
+[
+  {
+    "model": "hangman.word",
+    "pk": 1,
+    "fields": {
+      "text": "breakfast"
+    }
+  },
+  {
+    "model": "hangman.word",
+    "pk": 2,
+    "fields": {
+      "text": "lunch"
+    }
+  },
+  {
+    "model": "hangman.word",
+    "pk": 3,
+    "fields": {
+      "text": "dinner"
+    }
+  },
+  {
+    "model": "hangman.word",
+    "pk": 4,
+    "fields": {
+      "text": "radio"
+    }
+  },
+  {
+    "model": "hangman.word",
+    "pk": 5,
+    "fields": {
+      "text": "table"
+    }
+  },
+  {
+    "model": "hangman.word",
+    "pk": 6,
+    "fields": {
+      "text": "kitchen"
+    }
+  },
+  {
+    "model": "hangman.word",
+    "pk": 7,
+    "fields": {
+      "text": "sunshine"
+    }
+  },
+  {
+    "model": "hangman.word",
+    "pk": 8,
+    "fields": {
+      "text": "curtain"
+    }
+  },
+  {
+    "model": "hangman.word",
+    "pk": 9,
+    "fields": {
+      "text": "carpet"
+    }
+  },
+  {
+    "model": "hangman.word",
+    "pk": 10,
+    "fields": {
+      "text": "jacket"
+    }
+  }
+]
