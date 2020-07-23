@@ -56,7 +56,6 @@ class Hangman extends Component {
       clicked.push(value)
 
     if (word.includes(value)){
-      tries = tries
       for (let i in word) {
         if (word[i] === value) { toGuess[i] = value }
       }
@@ -113,7 +112,7 @@ class Hangman extends Component {
 
     return (
       <div className="container">
-        <div className="left-pane"><img src={this.props.images[this.state.tries]} alt="Image of hangman"/></div>
+        <div className="left-pane"><img src={this.props.images[this.state.tries]} alt="Hangman"/></div>
         <div className="right-pane">
           <div id="game">
             <p id="result" style={result}>{this.state.status === 'win' ? 'You Win!!' : 'Game Over!!'}</p>
