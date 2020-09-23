@@ -1,21 +1,29 @@
-import React from 'react';
-import Hangman from './components/Hangman';
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from '@apollo/react-hooks';
+import React from 'react'
+import Hangman from './components/Hangman'
+import { gql, useQuery } from '@apollo/client'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
-const client = new ApolloClient({
-  uri: 'https://localhost:8888/graphql/',
-});
+const getWords = gql`
+  query {
+    words {
+      id
+      text
+    }
+  }`
 
 function App() {
-  return (
-    <ApolloProvider client={client}>
+  const { loading, data } = useQuery(getWords)
+
+  if (loading) {
+    return <div className="loading"><CircularProgress /></div>
+  } else {
+    return (
       <div>
         <h1 className="title">Hangman</h1>
-        <Hangman />
+        <Hangman words={data.words}/>
       </div>
-    </ApolloProvider>
-  )
+    )
+  }
 }
 
 export default App

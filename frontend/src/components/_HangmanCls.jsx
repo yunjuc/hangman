@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { gql } from 'apollo-boost';
+import { gql } from '@apollo/client';
 import { graphql } from 'react-apollo';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import man0 from "./images/man0.png";
 import man1 from "./images/man1.png";
 import man2 from "./images/man2.png";
@@ -16,13 +17,12 @@ const getWords = gql`
       text
     }
   }
-`;
+`
 
 class Hangman extends Component {
   static defaultProps = {
     images: [man0, man1, man2, man3, man4, man5, man6],
   }
-  static wordbank = []
 
   constructor(props){
     super(props);
@@ -56,7 +56,6 @@ class Hangman extends Component {
       clicked.push(value)
 
     if (word.includes(value)){
-      tries = tries
       for (let i in word) {
         if (word[i] === value) { toGuess[i] = value }
       }
@@ -85,10 +84,9 @@ class Hangman extends Component {
   }
 
   newGame = () => {
-    //load data from backend
-    this.props.data.words.map(item => Hangman.wordbank.push(item.text))
-    const idx = Math.floor(Math.random() * (Hangman.wordbank.length))
-    const word = Hangman.wordbank[idx].toUpperCase()
+    const words = this.props.data.words.map(item => item.text)
+    const idx = Math.floor(Math.random() * (words.length))
+    const word = words[idx].toUpperCase()
     const toGuess = word.split('').map(item => item = '_')
 
     this.setState((state) => ({
@@ -101,34 +99,38 @@ class Hangman extends Component {
   }
 
   render() {
-    let playing = {"display": 'none'}
-    let result = {"display": 'none'}
+    if (this.props.data.loading) {
+      return <div className="loading"><CircularProgress /></div>
+    } else {
+      let playing = {"display": 'none'}
+      let result = {"display": 'none'}
 
-    if (this.state.status === 'win' || this.state.status === 'lose') {
-      result = {"display": ''}
-      playing = {"display": ''}
-    } else if (this.state.status === 'playing'){
-      playing = {"display": ''}
-    }
+      if (this.state.status === 'win' || this.state.status === 'lose') {
+        result = {"display": ''}
+        playing = {"display": ''}
+      } else if (this.state.status === 'playing'){
+        playing = {"display": ''}
+      }
 
-    return (
-      <div className="container">
-        <div className="left-pane"><img src={this.props.images[this.state.tries]} alt="Hangman"/></div>
-        <div className="right-pane">
-          <div id="game">
-            <p id="result" style={result}>{this.state.status === 'win' ? 'You Win!!' : 'Game Over!!'}</p>
-            <p style={playing} id="guess">{this.state.toGuess}</p>
-            <div>
-              <span style={playing} id="tries">Left tries: <span style={{color: '#FF6673'}}>
-                {this.state.tries}</span> </span>
-              <span id="answer" style={result}>The answer is: {this.state.word}</span>
+      return (
+        <div className="container">
+          <div className="left-pane"><img src={this.props.images[this.state.tries]} alt="Hangman"/></div>
+          <div className="right-pane">
+            <div id="game">
+              <p id="result" style={result}>{this.state.status === 'win' ? 'You Win!!' : 'Game Over!!'}</p>
+              <p style={playing} id="guess">{this.state.toGuess}</p>
+              <div>
+                <span style={playing} id="tries">Left tries: <span style={{color: '#FF6673'}}>
+                  {this.state.tries}</span> </span>
+                <span id="answer" style={result}>The answer is: {this.state.word}</span>
+              </div>
             </div>
+            <div id="keyboard">{this.keyboard()}</div>
+            <button id="start" onClick={this.newGame}>NEW GAME</button>
           </div>
-          <div id="keyboard">{this.keyboard()}</div>
-          <button id="start" onClick={this.newGame}>NEW GAME</button>
         </div>
-      </div>
-    )
+      )
+    }
   }
 }
 

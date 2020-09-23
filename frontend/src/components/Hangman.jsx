@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import fetchData from '../data';
+import React, { useState } from 'react'
 import man0 from "./images/man0.png";
 import man1 from "./images/man1.png";
 import man2 from "./images/man2.png";
@@ -8,10 +7,7 @@ import man4 from "./images/man4.png";
 import man5 from "./images/man5.png";
 import man6 from "./images/man6.png";
 
-let wordbank = []
-fetchData().then(data => wordbank = data)
-
-function Hangman() {
+function Hangman(props) {
   const images = [man0, man1, man2, man3, man4, man5, man6]
   const [word, setWord] = useState('')
   const [guess, setGuess] = useState([])
@@ -22,22 +18,23 @@ function Hangman() {
   const keyboard = () => {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     return letters.split('').map(item => (
-      <button disabled={clicked.includes(item)} className="letters"
+      <button data-testid="keys" disabled={clicked.includes(item)} className="letters"
               onClick={handleClick} key={item} value={item}>{item}
       </button>
     ))
   }
 
   const newGame = () => {
-    const idx = Math.floor(Math.random() * (wordbank.length))
-    const newWord = wordbank[idx].toUpperCase()
+    const words = props.words.map(item => item.text)
+    const idx = Math.floor(Math.random() * (words.length))
+    const newWord = words[idx].toUpperCase()
     const newGuess = newWord.split('').map(item => item = '_')
     setWord(newWord)
     setGuess(newGuess)
     setTries(6)
     setClicked([])
     setStatus('playing')
-  }
+}
 
   const handleClick = e => {
     if (status === 'playing') {
@@ -100,4 +97,4 @@ function Hangman() {
   )
 }
 
-export default Hangman;
+export default Hangman

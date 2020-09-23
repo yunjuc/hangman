@@ -1,16 +1,49 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import App from '../App';
-import Hangman from '../components/Hangman';
+import React from 'react'
+import { render, screen, act } from '@testing-library/react'
+import App from '../App'
+import { gql } from '@apollo/client'
+import { MockedProvider } from '@apollo/client/testing'
 
-it('App title exists', () => {
-  const wrapper = shallow(<App />);
-  const title = wrapper.find('.title').text();
-  expect(title).toBe('Hangman');
-});
+const query = gql`
+  query {
+    words {
+      id
+      text
+    }
+  }`
 
-it('Hangman component is rendered', () => {
-  const wrapper = shallow(<App />);
-  const counter = wrapper.find(Hangman).exists();
-  expect(counter).toBe(true);
-});
+const mocks = [
+  {
+    request: {
+      query: query,
+    },
+    result: {
+      data: {
+        words: [{id: 1, text: 'hello'}, {id: 2, text: 'world'}],
+      },
+    },
+  }
+]
+
+describe('App component', () => {
+  it('App compnent is rendered', () => {
+    const { container } = render(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <App />
+      </MockedProvider>
+    )
+    expect(container).toMatchSnapshot()
+  })
+
+  it('title is presented', async () => {
+    const { container } = render(
+      <MockedProvider mocks={mocks} addTypename={false}>
+        <App />
+      </MockedProvider>
+    )
+    await new Promise(resolve => setTimeout(resolve, 0))
+    const title = container.querySelector('.title')
+    expect(title).toHaveTextContent('Hangman')
+
+  })
+})
