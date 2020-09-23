@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import fetchData from '../data';
+import { createApolloFetch } from 'apollo-fetch';
 import man0 from "./images/man0.png";
 import man1 from "./images/man1.png";
 import man2 from "./images/man2.png";
@@ -8,8 +8,23 @@ import man4 from "./images/man4.png";
 import man5 from "./images/man5.png";
 import man6 from "./images/man6.png";
 
-let wordbank = []
-fetchData().then(data => wordbank = data)
+const uri = 'https://localhost:8888/graphql/'
+const apolloFetch = createApolloFetch({ uri })
+const wordbank = []
+const query = `
+  query {
+    words {
+      id
+      text
+    }
+  }
+`
+apolloFetch({ query })
+  .then(result => {
+    const { data } = result
+    data.words.map(el => wordbank.push(el.text))
+  })
+  .catch(err => console.log(err))
 
 function Hangman() {
   const images = [man0, man1, man2, man3, man4, man5, man6]
