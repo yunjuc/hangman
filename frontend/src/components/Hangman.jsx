@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { createApolloFetch } from 'apollo-fetch';
+import React, { useState } from 'react'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import man0 from "./images/man0.png";
 import man1 from "./images/man1.png";
 import man2 from "./images/man2.png";
@@ -8,25 +8,7 @@ import man4 from "./images/man4.png";
 import man5 from "./images/man5.png";
 import man6 from "./images/man6.png";
 
-const uri = 'https://localhost:8888/graphql/'
-const apolloFetch = createApolloFetch({ uri })
-const wordbank = []
-const query = `
-  query {
-    words {
-      id
-      text
-    }
-  }
-`
-apolloFetch({ query })
-  .then(result => {
-    const { data } = result
-    data.words.map(el => wordbank.push(el.text))
-  })
-  .catch(err => console.log(err))
-
-function Hangman() {
+function Hangman(props) {
   const images = [man0, man1, man2, man3, man4, man5, man6]
   const [word, setWord] = useState('')
   const [guess, setGuess] = useState([])
@@ -37,15 +19,15 @@ function Hangman() {
   const keyboard = () => {
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     return letters.split('').map(item => (
-      <button disabled={clicked.includes(item)} className="letters"
+      <button data-testid="keys" disabled={clicked.includes(item)} className="letters"
               onClick={handleClick} key={item} value={item}>{item}
       </button>
     ))
   }
 
   const newGame = () => {
-    const idx = Math.floor(Math.random() * (wordbank.length))
-    const newWord = wordbank[idx].toUpperCase()
+    const idx = Math.floor(Math.random() * (props.data.length))
+    const newWord = props.data[idx].toUpperCase()
     const newGuess = newWord.split('').map(item => item = '_')
     setWord(newWord)
     setGuess(newGuess)
@@ -95,24 +77,28 @@ function Hangman() {
     playing = {"display": ''}
   }
 
-  return (
-    <div className="container">
-      <div className="left-pane"><img src={images[tries]} alt="Hangman"/></div>
-      <div className="right-pane">
-        <div id="game">
-          <p id="result" style={result}>{status === 'win' ? 'You Win!!' : 'Game Over!!'}</p>
-          <p style={playing} id="guess">{guess}</p>
-          <div>
-            <span style={playing} id="tries">Left tries: <span style={{color: '#FF6673'}}>
-              {tries}</span> </span>
-            <span id="answer" style={result}>The answer is: {word}</span>
+  if (props.data.length === 0) {
+    return <div className="loading"><CircularProgress /></div>
+  } else {
+    return (
+      <div className="container">
+        <div className="left-pane"><img src={images[tries]} alt="Hangman"/></div>
+        <div className="right-pane">
+          <div id="game">
+            <p id="result" style={result}>{status === 'win' ? 'You Win!!' : 'Game Over!!'}</p>
+            <p style={playing} id="guess">{guess}</p>
+            <div>
+              <span style={playing} id="tries">Left tries: <span style={{color: '#FF6673'}}>
+                {tries}</span> </span>
+              <span id="answer" style={result}>The answer is: {word}</span>
+            </div>
           </div>
+          <div id="keyboard">{keyboard()}</div>
+          <button id="start" onClick={newGame}>NEW GAME</button>
         </div>
-        <div id="keyboard">{keyboard()}</div>
-        <button id="start" onClick={newGame}>NEW GAME</button>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default Hangman;
