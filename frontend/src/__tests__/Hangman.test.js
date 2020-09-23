@@ -1,40 +1,47 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, fireEvent, screen } from '@testing-library/react'
 import Hangman from '../components/Hangman';
 
-it('a dummy test...', () => {
-  const wrapper = shallow(<Hangman />);
-  const mock = wrapper.find('#game');
-  expect(mock).toBeTruthy();
-});
+describe('Hangman component', () => {
+  const data = ['hello', 'world']
 
-// ** need to add mock apollo client for the rest tests to run **
-// const wrapper = shallow(<Hangman />);
-// console.log(wrapper.debug());
-//
-// it('Keyboard is presented', () => {
-//   const keys = wrapper.find('#keyboard').children();
-//   expect(keys).to.have.lengthOf(26);
-// });
-//
-// it('Button is presented', () => {
-//   const start = wrapper.find('#start').text();
-//   expect(start).toBe('NEW GAME');
-// });
-//
-// it('Initial state of tries = 0', () => {
-//   const wrapper = shallow(<Hangman />);
-//   expect(wrapper.state().tries).to.equal(0);
-// });
-//
-// it('New game state of tries = 6', () => {
-//   const wrapper = shallow(<Hangman />);
-//   const button = wrapper.find('button').at(1).simulate('click');;
-//   expect(wrapper.state().tries).to.equal(6);
-// });
-//
-// it('Start a new game', () => {
-//   const button = wrapper.find('#start').simulate('click');
-//   const game = wrapper.find('#game');
-//   expect(game).to.have.lengthOf(1);
-// });
+  it('Hangman compnent is rendered', () => {
+    const { container } = render(<Hangman data={data} />)
+
+    expect(container).toMatchSnapshot()
+  })
+
+  it('Keyboard is presented', () => {
+    const { container } = render(<Hangman data={data} />)
+    const keys = screen.getAllByTestId('keys')
+
+    expect(keys).toHaveLength(26);
+  })
+
+  it('new game button is presented', () => {
+    const { container } = render(<Hangman data={data} />)
+
+    expect(container).toHaveTextContent('NEW GAME')
+  })
+
+  it('game starts when button clicked', () => {
+    const { container } = render(<Hangman data={data} />)
+
+    const firstTry = container.querySelector('#tries')
+    expect(firstTry).toHaveTextContent('Left tries: 0')
+
+    fireEvent.click(screen.getByText('NEW GAME'))
+
+    const secondTry = container.querySelector('#tries')
+    expect(secondTry).toHaveTextContent('Left tries: 6')
+  })
+
+  it('nothing is created when no data', () => {
+    const { container } = render(<Hangman data={[]} />)
+    const keyboard = container.querySelector('#keyboard')
+    const button = container.querySelector('#start')
+
+    expect(keyboard).toBeNull()
+    expect(button).toBeNull()
+  })
+})

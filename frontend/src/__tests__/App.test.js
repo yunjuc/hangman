@@ -1,16 +1,18 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import App from '../App';
-import Hangman from '../components/Hangman';
+import React from 'react'
+import { render } from '@testing-library/react'
+import App from '../App'
 
-it('App title exists', () => {
-  const wrapper = shallow(<App />);
-  const title = wrapper.find('.title').text();
-  expect(title).toBe('Hangman');
-});
+describe('App component', () => {
+  it('App compnent is rendered', () => {
+    const { container } = render(<App />)
 
-it('Hangman component is rendered', () => {
-  const wrapper = shallow(<App />);
-  const counter = wrapper.find(Hangman).exists();
-  expect(counter).toBe(true);
-});
+    expect(container).toMatchSnapshot()
+  })
+
+  it('title is presented', () => {
+    const { container } = render(<App />)
+    const title = container.querySelector('h1')
+
+    expect(title).toHaveTextContent('Hangman')
+  })
+})
