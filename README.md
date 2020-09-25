@@ -21,7 +21,7 @@ This is a project to create a simple full-stack game app. The app is implemented
 - Run `python manage.py loaddata ./hangman/fixtures/*` to load data. *(first time only)*
 - Run `python manage.py runsslserver 0.0.0.0:8888` to start the backend server.
 
-To start backend unit test, run:
+To start backend unit test, run:<br/>
 `py.test`
 
 ### Frontend
@@ -30,7 +30,7 @@ To start backend unit test, run:
 - In the **frontend** folder, run `npm install` or `yarn install` to install node modules. *(first time only)*
 - With the backend server started, run `npm start` or `yarn start` and the app will be running in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-To start the frontend unit test, run:
+To start the frontend unit test, run:<br/>
 `npm test` or `yarn test`
 
 ## Author
