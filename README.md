@@ -4,7 +4,7 @@
 </p>
 
 This is a project to create a simple full-stack game app. The app is implemented with [React](https://reactjs.org/) on the frontend and [Django](https://www.djangoproject.com/) and [GraphQL](https://graphql.org/) on the backend. Within this project you will find examples of:
-- React components with [Apollo](https://www.apollographql.com/)
+- React components with [Apollo Client](https://www.apollographql.com/docs/react/)
 - Frontend unit test with [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
 - Django web framework
 - GraphQL API with [Graphene](https://graphene-python.org/)
