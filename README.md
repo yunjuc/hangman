@@ -13,7 +13,7 @@ This is a project to create a simple full-stack game app. The app is implemented
 
 ## Set Up
 ### Backend
-**You should have [Pipenv](https://pypi.org/project/pipenv/) installed in your computer before moving to the next step.*
+*Note: You should have [Pipenv](https://pypi.org/project/pipenv/) installed in your computer before moving to the next step.*
 
 - In the **root** folder, run `pipenv install` to install python packages. *(first time only)*
 - Run `pipenv shell` to enter the project's virtual environment.
@@ -21,17 +21,15 @@ This is a project to create a simple full-stack game app. The app is implemented
 - Run `python manage.py loaddata ./hangman/fixtures/*` to load data. *(first time only)*
 - Run `python manage.py runsslserver 0.0.0.0:8888` to start the backend server.
 
-To start backend unit test, run:<br/>
-`py.test`
+To start backend unit test, run `py.test`
 
 ### Frontend
-**You should have [npm](https://testing-library.com/docs/react-testing-library/intro) or [Yarn](https://classic.yarnpkg.com/en/) installed in your computer before moving to the next step.*
+*Note: You should have [npm](https://testing-library.com/docs/react-testing-library/intro) or [Yarn](https://classic.yarnpkg.com/en/) installed in your computer before moving to the next step.*
 
 - In the **frontend** folder, run `npm install` or `yarn install` to install node modules. *(first time only)*
 - With the backend server started, run `npm start` or `yarn start` and the app will be running in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-To start the frontend unit test, run:<br/>
-`npm test` or `yarn test`
+To start the frontend unit test, run `npm test` or `yarn test`
 
 ## Author
 Yunju Chen, [yunjuc](https://github.com/yunjuc) | [@yunjuc](http://twitter.com/yunjuc/)
