@@ -12,6 +12,9 @@ graphene-django = "*"
 django-sslserver = "*"
 pytest-django = "*"
 mixer = "*"
+whitenoise = "*"
+django-heroku = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.6"
