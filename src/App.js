@@ -15,7 +15,7 @@ function App() {
   const { loading, data } = useQuery(getWords)
 
   if (loading) {
-    return <div className="loading"><CircularProgress /></div>
+    return <div className="loading"><CircularProgress color="inherit"/></div>
   } else {
     return (
       <div>

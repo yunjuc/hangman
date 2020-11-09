@@ -3,7 +3,7 @@
   <img src="https://user-images.githubusercontent.com/18255878/87886088-1a026800-c9cf-11ea-8d99-d60a2d489068.jpg" />
 </p>
 
-The goal of the project to create a simple full-stack app using [GraphQL](https://graphql.org/). The app is implemented with [React](https://reactjs.org/) on the frontend and [Django](https://www.djangoproject.com/) on the backend. The final app is deployed on Heroku and you can see the live app on [https://hangman-react-django.herokuapp.com/](https://hangman-react-django.herokuapp.com/).
+The goal of the project is to create a simple full-stack app using [GraphQL](https://graphql.org/). The app is implemented with [React](https://reactjs.org/) on the frontend and [Django](https://www.djangoproject.com/) on the backend. The final app is deployed on Heroku and you can see the live app on [https://hangman-react-django.herokuapp.com/](https://hangman-react-django.herokuapp.com/).
 
 Within this project you will find examples of:
 - React components with [Apollo Client](https://www.apollographql.com/docs/react/)
@@ -11,7 +11,7 @@ Within this project you will find examples of:
 - Django web framework
 - GraphQL API with [Graphene](https://graphene-python.org/)
 - Backend unit test with [Pytest](https://docs.pytest.org/en/stable/)
-- Responsive web design
+- [Heroku](https://dashboard.heroku.com/) deployment
 
 ## Set Up
 ### Backend
