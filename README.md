@@ -11,7 +11,6 @@ Within this project you will find examples of:
 - Django web framework
 - GraphQL API with [Graphene](https://graphene-python.org/)
 - Backend unit test with [Pytest](https://docs.pytest.org/en/stable/)
-- [Heroku](https://dashboard.heroku.com/) deployment
 
 ## Set Up
 ### Backend
