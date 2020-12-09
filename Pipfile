@@ -6,6 +6,7 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
+psycopg2 = "==2.7.5"
 django = "*"
 django-cors-headers = "*"
 graphene-django = "*"
@@ -15,7 +16,7 @@ mixer = "*"
 whitenoise = "*"
 django-heroku = "*"
 gunicorn = "*"
-psycopg2-binary = "*"
+dj-database-url = "*"
 
 [requires]
 python_version = "3.6"
